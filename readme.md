@@ -11,13 +11,13 @@ cd tg-videosticker-formatter
 pip install -r requirements.txt
 ```
 
-### Reformat video file
+### Processing single video file
 Specify the path to the video file using `-in` flag and
 output folder where the formatted video should be stored via `-out` flag.
 ```
 python tg-videosticker-formatter.py format -in cats.webm -out .
 ```
-### Reformat all video files in the folder
+### Processing a directory of video files
 You can also batch process the files. Specify the path to the
 folder that contains your video files using `-in` flag.
 ```
