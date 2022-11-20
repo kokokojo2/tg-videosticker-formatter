@@ -29,17 +29,12 @@ class VideoStickerFormatter:
         self.video_clip = self.video_clip.without_audio()
 
     def save_to_file(self, filename):
-        self.video_clip.write_videofile(filename, codec="vp8")
+        # format=yuv420p option is present as telegram only accepts yuv420p encoding
+        # https://superuser.com/questions/1372702/ffmpeg-yuv420p-pixel-format-missing
+        self.video_clip.write_videofile(
+            filename, codec="vp9", ffmpeg_params=["-vf", "format=yuv420p"]
+        )
 
     def format_and_save(self, filename):
         self.format_video()
         self.save_to_file(filename)
-
-
-if __name__ == "__main__":
-    try:
-        vsf = VideoStickerFormatter("Video Of Funny Cat.mp4")
-        vsf.format_video()
-        vsf.save_to_file("test_formatted.WEBM")
-    except OSError as e:
-        print(e)
