@@ -32,7 +32,11 @@ class VideoStickerFormatter:
         # format=yuv420p option is present as telegram only accepts yuv420p encoding
         # https://superuser.com/questions/1372702/ffmpeg-yuv420p-pixel-format-missing
         self.video_clip.write_videofile(
-            filename, codec="vp9", ffmpeg_params=["-vf", "format=yuv420p"]
+            filename,
+            verbose=False,
+            logger=None,
+            codec="vp9",
+            ffmpeg_params=["-vf", "format=yuv420p"],
         )
 
     def format_and_save(self, filename):
