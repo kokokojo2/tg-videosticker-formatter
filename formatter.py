@@ -23,7 +23,10 @@ class VideoStickerFormatter:
             self.video_clip = self.video_clip.set_fps(self.REQUIRED_MAX_FPS)
 
     def trim(self):
-        self.video_clip = self.video_clip.subclip(0, self.MAX_VIDEO_LENGTH_SEC)
+        if self.video_clip.duration > self.MAX_VIDEO_LENGTH_SEC:
+            self.video_clip = self.video_clip.subclip(
+                0, self.MAX_VIDEO_LENGTH_SEC - 0.01
+            )
 
     def remove_audio(self):
         self.video_clip = self.video_clip.without_audio()
